@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: agentic-idp
+  namespace: idp-system
+  labels:
+    app: agentic-idp
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: agentic-idp
+  template:
+    metadata:
+      labels:
+        app: agentic-idp
+    spec:
+      containers:
+        - name: agentic-idp
+          image: ghcr.io/yourusername/agentic-idp:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8000
+          env:
+            - name: OPENAI_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: idp-secrets
+                  key: openai-api-key
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 10

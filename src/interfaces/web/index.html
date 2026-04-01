@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agentic IDP Console</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+
+    <header class="glass-header">
+        <div class="logo">
+            <div class="logo-icon"></div>
+            <h1>Agentic IDP</h1>
+        </div>
+        <nav class="tabs">
+            <button class="tab-btn active" data-target="healing-view">Self-Healing Pipeline</button>
+            <button class="tab-btn" data-target="test-view">Autonomous Tester</button>
+        </nav>
+    </header>
+
+    <main class="container">
+        <!-- Self Healing View -->
+        <section id="healing-view" class="view active">
+            <div class="grid-layout">
+                <div class="panel glass-panel input-panel">
+                    <h2><span class="dot red"></span> CI Failure Details</h2>
+                    <form id="heal-form">
+                        <div class="form-group">
+                            <label>Failed Test Name</label>
+                            <input type="text" id="fail-name" value="test_user_registration" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Error Message</label>
+                            <input type="text" id="fail-msg" value="404 Not Found response when calling POST /users" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Traceback Log</label>
+                            <textarea id="fail-trace" required>File 'tests/test_users.py', line 45, in test_user_registration...
+httpx.HTTPStatusError: 404</textarea>
+                        </div>
+                        <button type="submit" class="submit-btn primary">
+                            <span class="btn-text">Analyze & Fix</span>
+                            <span class="loader hidden"></span>
+                        </button>
+                    </form>
+                </div>
+
+                <div class="panel glass-panel output-panel">
+                    <h2><span class="dot green"></span> AI Proposal</h2>
+                    <div id="heal-result" class="result-placeholder">
+                        <div class="empty-state">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                            <p>Submit a failure log to see agentic magic in action.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Test Generator View -->
+        <section id="test-view" class="view">
+            <div class="grid-layout">
+                <div class="panel glass-panel input-panel">
+                    <h2><span class="dot blue"></span> API Specification</h2>
+                    <form id="test-form">
+                        <div class="form-group">
+                            <label>Endpoint Path</label>
+                            <input type="text" id="api-path" value="/api/v1/users" required>
+                        </div>
+                        <div class="form-group">
+                            <label>HTTP Method</label>
+                            <select id="api-method">
+                                <option value="GET">GET</option>
+                                <option value="POST" selected>POST</option>
+                                <option value="PUT">PUT</option>
+                                <option value="DELETE">DELETE</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea id="api-desc" required>Registers a new user into the platform.</textarea>
+                        </div>
+                        <button type="submit" class="submit-btn primary">
+                            <span class="btn-text">Generate Tests</span>
+                            <span class="loader hidden"></span>
+                        </button>
+                    </form>
+                </div>
+
+                <div class="panel glass-panel output-panel">
+                    <h2><span class="dot yellow"></span> Generated Suite</h2>
+                    <div id="test-result" class="result-placeholder">
+                        <div class="empty-state">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                            <p>Provide an API spec to generate autonomous tests.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
